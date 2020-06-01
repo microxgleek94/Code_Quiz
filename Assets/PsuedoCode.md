@@ -2,6 +2,13 @@
 
     * Use Bootstrap to create the user interface, so that way it is resposive 
 
+        **Bootstrap**
+        -there needs to be a container that holds the timer
+        -"" the question
+        -"" the answers
+        -"" the Correct/Incorrect alert when the user gets the question wrong
+        -"" the High Score link 
+
     * HTML and CSS need to be created using JS
 
  
@@ -26,6 +33,7 @@
     * Users have 4 choices, and the choices are in clickable boxes
     * If the user chooses a correct answer, "Correct!" is shown at the  bottom of the page
     * If the user gets the answer incorrect, "Incorrect!" is shown at the bottom of the page, and also time is subtracted from the counter 
+    
 
 **When the Quiz is over**
 
