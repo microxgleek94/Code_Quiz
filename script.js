@@ -1,8 +1,9 @@
+// elements from HTML that JS will interact with
 var startQuiz = document.querySelector("#start-button");
 var questionBlock = document.querySelector("#question-block");
 var timerDisplay = document.querySelector("#timer-display");
-var highscoreDisplay = document.querySelector("#high-score-screen");
-var finalscoreDisplay = document.querySelector("#final-score-screen");
+var highscoreDisplay = document.querySelector("#high-score-container");
+var finalscoreDisplay = document.querySelector("#final-score-container");
 var startpageDisplay = document.querySelector("#start-page");
 var startBtnDisplay = document.querySelector("#start-button");
 var quizinfoDisplay = document.querySelector("#quiz-info");
@@ -18,15 +19,47 @@ var resultsDisplay = document.querySelector("#results");
 
 var quest1 = {
   question: "What is Captian America's weapon of choice?",
-  opt1: "A hammer",
-  opt2: "Various inventions created from his imagination",
-  opt3: "A shield",
-  opt4: "A bow and arrow",
-  answer: ""
+  opt1: "A.) A hammer",
+  opt2: "B.) Various inventions created from his imagination",
+  opt3: "C.) A shield",
+  opt4: "D.) A bow and arrow",
+  answer: "C"
 }
 
 var quest2 = {
-  
+  question: "In the 'Avengers: Age of Ultron', who is Vision?",
+  opt1: "A.) Tony Stark's AI assistance, J.A.R.V.I.S after it's programming is uploaded into a synthetic body",
+  opt2: "B.) An evil dream monster that steals people's sight when they're sleeping",
+  opt3: "C.) Scarlet Witch's partner",
+  opt4: "D.) Both A and C",
+  answer: "D"
+}
+
+var quest3 = {
+  question: "What is Thor and Loki's sister's name?",
+  opt1: "A.) Pepper",
+  opt2: "B.) Hela",
+  opt3: "C.) Thelma",
+  opt4: "D.) Jane",
+  answer: "B"
+}
+
+var quest4 = {
+  question: "In both 'The Avengers' and 'Avengers: Endgame', what place do Black Widow and Hawkeye refrence during the battle in New York and also while on planet Vormir?",
+  opt1: "A.) Budapest",
+  opt2: "B.) Cuba",
+  opt3: "C.) Wakanda",
+  opt4: "D.) Gotham City",
+  answer: "A"
+}
+
+var quest5 = {
+  question: "What did Bruce Banner say to Captian America was his 'secret' for summoning the Hulk?",
+  opt1: "A.) 'I'm always happy'",
+  opt2: "B.) 'I'm always angry'",
+  opt3: "C.) 'I love Natasha'",
+  opt4: "D.) 'I'm never nervous'",
+  answer: "B"
 }
 
 
@@ -39,7 +72,7 @@ var questionArr =[quest1,qquest2,quest3,quest4,quest5];
 var questionLen = questionArr.length - 1;
 var index = 0;
 var livequestion;
-var newGame;
+var gameover;
 
 
 
@@ -52,7 +85,7 @@ var newGame;
 // When user "clicks" start quiz button function will run
 startQuiz.addEventListener("click",startQuiz());
 
-function startQuiz() {
+function startQuiz(event) {
 
 }
 
@@ -181,18 +214,6 @@ function toggleStatus(event) {
   setTime();
   renderTime();
 }
-
-//This function is defined but never used.
-function setTimePreferences() {
-  localStorage.setItem(
-    "preferences",
-    JSON.stringify({
-      workMinutes: workMinutesInput.value.trim(),
-      restMinutes: restMinutesInput.value.trim()
-    })
-  );
-}
-
 
 pauseButton.addEventListener("click", pauseTimer);
 stopButton.addEventListener("click", stopTimer);

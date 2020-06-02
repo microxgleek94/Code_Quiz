@@ -30,8 +30,8 @@
         </div>
         <div class="jumbotron jumbotron-fluid col-sm pl-5 pr-5 text-sm-center" id="quiz-info">
             <div class="container">
-                <h1 class="display-4">Marvel Superhero Quiz</h1>
-                <p class="lead">You have 60 seconds to answer 5 questions about various Marvel superheroes! Be warned: if you get a question incorrect, 5 seconds
+                <h1 class="display-4">Marvel Cinematic Universe Quiz</h1>
+                <p class="lead">You have 60 seconds to answer 5 questions about various aspects of the Marvel Cinematic Universe! Be warned: if you get a question incorrect, 5 seconds
                     will be deducted from your remaining time. After the quiz is over, be sure save your high score and see if you can beat it next time. Good luck!
                 </p>
             </div>
@@ -56,12 +56,28 @@
 
 
     <!-- This is where final score will dynamically appear after the game ends and the user will interact with -->
-    <div id="final-score-screen"></div>
+    <div id="final-score-container"></div>
+    <div id = "finalscore" style = "display:none">
+        <h3> Time's Up! How'd you do?</h3>
+        <p>  Final Score: <span id = 'score'>0 </span></p>
+        <form id = "username">
+            <label>Players' Name </label>
+            <input type="text" id="userinput"/>
+            <input type = "button" value = "Submit" id ="submitName"/>
+        </form>
+    </div>
 
 
     <!-- This is where the high score will dynamically appear and the user can input their score -->
-    <div id="high-score-screen"></div>
-
+    <div id="high-score-container" style = "display:none">
+    <div id = "highscore-list">
+        <h3> High Score List </h3>
+        <ul id ="pastScores"></ul>
+        <form id = "menu">
+           <input type = "button" value = "GoBack" id = "goBackMenu">
+           <input type = "button" value = "Clear HighScore" id = "clearScore"> 
+        </form>
+    </div>
 
 
 

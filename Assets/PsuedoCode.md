@@ -34,7 +34,8 @@
     * Users have 4-5 choices, and the choices are in clickable boxes
     * If the user chooses a correct answer, "Correct!" is shown at the  bottom of the page
     * If the user gets the answer incorrect, "Incorrect!" is shown at the bottom of the page, and also time is subtracted from the counter 
-    *Sounds need to be inputted for incorrect and 
+    *Sounds need to be inputted for incorrect and corrct answers
+    *Music to play in back ground?
 
 **When the Quiz is over**
 
