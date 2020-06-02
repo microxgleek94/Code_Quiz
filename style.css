@@ -4,3 +4,6 @@ body {
 #start-button {
     font-style: italic;
 }
+.hide {
+    display: none;
+}

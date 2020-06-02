@@ -9,7 +9,8 @@
         -"" the Correct/Incorrect alert when the user gets the question wrong
         -"" the High Score link 
 
-    * HTML and CSS need to be created using JS
+    * HTML elements and CSS for the quiz/buttons need to be created using JS
+        -make sure to first define CSS elements 
 
  
  **Elements for the Start Page**
@@ -30,10 +31,10 @@
 **Elements for the Quiz**
 
     * Questions appear dynamically
-    * Users have 4 choices, and the choices are in clickable boxes
+    * Users have 4-5 choices, and the choices are in clickable boxes
     * If the user chooses a correct answer, "Correct!" is shown at the  bottom of the page
     * If the user gets the answer incorrect, "Incorrect!" is shown at the bottom of the page, and also time is subtracted from the counter 
-    
+    *Sounds need to be inputted for incorrect and 
 
 **When the Quiz is over**
 
@@ -44,5 +45,6 @@
     * An input field labeled "Intials" needs to appear so the user can enter their initials for the high score
     * There needs to be a "Submit" button
     *When the user presses "Submit" they are taken to the "High Score" page 
+    *The user should be able to see their latest score and all past scores 
 
     

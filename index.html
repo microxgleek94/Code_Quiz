@@ -18,26 +18,63 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Muli:ital@0;1&display=swap" rel="stylesheet">
 
-    <title>Coding Quiz </title>
+    <title>Coding Quiz</title>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="start-page">
         <div class ="row">
-            <div class= "col-sm-4 pl-5 pr-5 " id="high-score-display"><a href="./high_scores.html">View High Scores</a></div>
+            <div class= "col-sm-4 pl-5 pr-5 hide" id="high-score-display">View High Scores</div>
             <div class= "col-sm-4"></div>
-            <div class= "col-sm-4 pl-5 pr-5 text-sm-center" id="timer-display"> Timer:</div>
+            <div class= "col-sm-4 pl-5 pr-5 text-sm-center class" id="timer-display">Timer:</div>
         </div>
-        <div class="jumbotron jumbotron-fluid col-sm pl-5 pr-5 text-sm-center">
+        <div class="jumbotron jumbotron-fluid col-sm pl-5 pr-5 text-sm-center" id="quiz-info">
             <div class="container">
-                <h1 class="display-4">Coding Quiz</h1>
-                <p class="lead">You have 60 seconds to answer 5 questions. If you get a question incorrect, 5 seconds
-                    will be deducted from your remaining time. Check out the "High Score" link to see your competition. Good luck!
+                <h1 class="display-4">Marvel Superhero Quiz</h1>
+                <p class="lead">You have 60 seconds to answer 5 questions about various Marvel superheroes! Be warned: if you get a question incorrect, 5 seconds
+                    will be deducted from your remaining time. After the quiz is over, be sure save your high score and see if you can beat it next time. Good luck!
                 </p>
             </div>
         </div>
         <button type="button" class="btn btn-info btn-lg btn-block" id="start-button">Click here to start the quiz!</button>
     </div>
+
+    <!-- This is where the questions will dynamically appear and the user will interact with -->
+    <div class="container-fluid" id="question-block">
+        <div id="question-display">Question</div>
+        <div id="answer-display">
+        <button class="btn">Answer 1</button>
+        <button class="btn">Answer 2</button>
+        <button class="btn">Answer 3</button>
+        <button class="btn">Answer 4</button>
+      </div>
+      <div id="results"></div>
+    </div>
+
+
+
+
+
+    <!-- This is where final score will dynamically appear after the game ends and the user will interact with -->
+    <div id="final-score-screen"></div>
+
+
+    <!-- This is where the high score will dynamically appear and the user can input their score -->
+    <div id="high-score-screen"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- jQuery, Bootstrap, and Personal JS links -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
