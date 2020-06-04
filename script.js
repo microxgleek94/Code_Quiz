@@ -1,5 +1,5 @@
 // elements from HTML that JS will interact with
-var startQuiz = document.querySelector("#start-button");
+var quizStartBtn = document.querySelector("#start-button");
 var questionBlock = document.querySelector("#question-block");
 var timerDisplay = document.querySelector("#timer-display");
 var highscoreDisplay = document.querySelector("#high-score-container");
@@ -9,6 +9,10 @@ var startBtnDisplay = document.querySelector("#start-button");
 var quizinfoDisplay = document.querySelector("#quiz-info");
 var questionDisplay = document.querySelector("#question-display");
 var answerDisplay = document.querySelector("#answer-display");
+var optA = document.querySelector("#btn");
+var optB = document.querySelector("#btn");
+var optC = document.querySelector("#btn");
+var optD = document.querySelector("#btn");
 var answerBtnDisplay = document.querySelector("#btn");
 var resultsDisplay = document.querySelector("#results");
 
@@ -18,7 +22,7 @@ var resultsDisplay = document.querySelector("#results");
 // Defining the "question" objects and other varibles
 
 var quest1 = {
-  question: "What is Captian America's weapon of choice?",
+  question: "What is Captian America's weapon of opt?",
   opt1: "A.) A hammer",
   opt2: "B.) Various inventions created from his imagination",
   opt3: "C.) A shield",
@@ -63,158 +67,214 @@ var quest5 = {
 }
 
 
-
 var totalSeconds;
 var secondsElapsed = 0;
 var interval;
 var score = 0;
-var questionArr =[quest1,qquest2,quest3,quest4,quest5];
+var questionArr = [quest1, qquest2, quest3, quest4, quest5];
 var questionLen = questionArr.length - 1;
 var index = 0;
-var livequestion;
+var quizquestion;
 var gameover;
+var playerList = [{name:'', score:''}];
 
 
 
 
+// Quiz functions //
 
 
+/* When user "clicks" start quiz button function will run
+and the quiz infox box will dissappear and the first question will appear*/
+quizStartBtn.addEventListener("click", startQuiz());
 
 
-
-// When user "clicks" start quiz button function will run
-startQuiz.addEventListener("click",startQuiz());
-
-function startQuiz(event) {
-
+function startQuiz() {
+  gameover = false;
+  console.log("The start quiz button was pressed and questions page appeared");
+  startpageDisplay.style.display = "none";
+  questionsDisplay.style.display = "block";
+  //to make question array appear randomly each time user plays quiz
+  randQuestions = questionsArr.sort(() => Math.random() -0.5)
+  currentQuestion = 0
+  nxtQuestion();
+  startTimer();
 }
 
-//These two functions are just for making sure the numbers look nice for the html elements
-function getFormattedMinutes() {
+function nxtQuestion(){
+  resetState()
+  showQuestion(randomQuestions[currentQuestion])
+}
 
-  var secondsLeft = totalSeconds - secondsElapsed;
 
-  var minutesLeft = Math.floor(secondsLeft / 60);
-
-  var formattedMinutes;
-
-  if (minutesLeft < 10) {
-    formattedMinutes = "0" + minutesLeft;
-  } else {
-    formattedMinutes = minutesLeft;
+  // function to print the question and answer arrays to HTML elements
+  function renderQuestion() {
+    console.log("Start Render Question");
+    
+    quizquestion = questionArr[index];
+    
+    questionDisplay.textContent = quizquestion.question;
+    optA.textContent = quizquestion.opt1;
+    optB.textContent = quizquestion.opt2;
+    optC.textContent = quizquestion.opt3;
+    optD.textContent = quizquestion.opt4;
+    resultsDisplay.textContent = "";
   }
 
-  return formattedMinutes;
-}
 
-function getFormattedSeconds() {
-  var secondsLeft = (totalSeconds - secondsElapsed) % 60;
 
-  var formattedSeconds;
+  choicesDisplay.addEventListener("click", checkAnswer);
 
-  if (secondsLeft < 10) {
-    formattedSeconds = "0" + secondsLeft;
-  } else {
-    formattedSeconds = secondsLeft;
-  }
-
-  return formattedSeconds;
-}
-
-/* This function just retrieves the values from the html input elements; Sort of 
-   getting run in the background, it sets the totalSeconds variable which
-   is used in getFormattedMinutes/Seconds() and the renderTime() function. 
-   It essentially resets our timer */
-function setTime() {
-  var minutes;
-
-  if (status === "Working") {
-    minutes = workMinutesInput.value.trim();
-  } else {
-    minutes = restMinutesInput.value.trim();
-  }
-
-  clearInterval(interval);
-  totalSeconds = minutes * 60;
-}
-
-//This function does 2 things. displays the time and checks to see if time is up.
-function renderTime() {
-  // When renderTime is called it sets the textContent for the timer html...
-  minutesDisplay.textContent = getFormattedMinutes();
-  secondsDisplay.textContent = getFormattedSeconds();
-
- // ..and then checks to see if the time has run out
-  if (secondsElapsed >= totalSeconds) {
-    if (status === "Working") {
-      alert("Time for a break!");
+  function checkAnswer(event) {
+    event.stopPropagation();
+   
+    //this checks to see which answer the user picked 
+    let userchoice = event.target.getAttribute("data-index");
+    console.log(`User clicked on choice: ${userchoice}`);
+    console.log(`Correct Choice is: ${quizquestion.answer}`);
+  
+    if (userchoice == quizquestion.answer) {
+        score++;
+        resultsDisplay.textContent="Great job, bub. That was the right answer.";
+        console.log(`User picked correct answer current score: ${score}`);
     } else {
-      alert("Time to get back to work!");
+        secondsElapsed = secondsElapsed + 5;
+        resultEl.textContent="Puny god! That was the wrong answer. You're gunna have to do better than that.";
+        console.log(`User chose inccorect answer: - 5 sec. current score: ${score}`);
     }
-
-    stopTimer();
+    setTimeout(nextQuestions, 1000);
+  } 
+  
+  function nextQuestions () {
+    if (index < questionLen) {
+      // Keep going to next question in the array
+      index++;
+      renderQuestion();
+    } else {
+      // Game over
+      stopTimer();
+      renderFinalscore();
+    }
   }
-}
+  
+  function renderFinalscore() {
+    gameover = true;
+    questionsDisplay.style.display = "none";
+    finalscoreDisplay.style.display = "block";
+    scoreEl.textContent = score;
+  }
+  
 
-// This function is where the "time" aspect of the timer runs
-// Notice no settings are changed other than to increment the secondsElapsed var
+  submitName.addEventListener("click", function (event){
+
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("FORM submit clicked:", userInput.value );
+    finalscoreDisplay.style.display = "none";
+    addPersonToList();
+    highscoreDisplay.style.display = "block";
+    renderHighscore();
+  } )
+  
+  //function to add a user's name and score to the "High score" list
+  function addPersonToList() {
+    event.preventDefault();
+    var name = userInput.value;
+    playerList.push({ "name": name, "score": score });
+    console.log("Player list array content: ", playerListDisplay);
+    
+  }
+  
+
+  //function to create user's final score
+  function renderHighscore () {
+    console.log("renderHighScore, score is: ", score);
+    var name = userinputEl.value;
+    var li = document.createElement("li");
+    li.id = playerList.length;
+    li.textContent = name + ":  " + score;
+    playerListDisplay.append(li);
+  }
+  
+
+
+//function for the "Go Back" button
+  goBackMenuEl.addEventListener("click", goBackMenu);
+  
+  function goBackBtn () {
+    console.log("Inside GoBack Menu");
+    highscoreDisplay.style.display = "none";
+    firstpageEl.style.display = "block";
+    score=0;
+    index=0;
+    totalSeconds = 0;
+    secondsElapsed = 0;
+    scoreEl.textContent = 0; // Re-initialze score display value before next round start
+    userinputEl.value=""; // Re-Intialize Players Name to nothing, else next round, old name remains.
+  }
+  
+  clearScoreEl.addEventListener("click", emptyscore);
+  
+  function emptyscore () {
+    event.preventDefault();
+    event.stopPropagation();
+    playerListDisplay.innerHTML = "";
+    playerList = [];
+    console.log("clear score entered. Array Playerlist should be nothing: ", playerListDisplay);
+  }
+  
+  viewscoreEl.addEventListener("click", function(event) {
+    console.log("User clicked Top Corner View High Score");
+    stopTimer();
+    firstpageEl.style.display = "none";
+    questionsDisplay.style.display = "none";
+    finalscoreDisplay.style.display = "none";
+    highscoreDisplay.style.display = "block";
+  })
+
+
+
+
+  
+  
+
+// Timer functions //
+
+
 function startTimer() {
-  setTime();
+  totalSeconds = 60;
+  clearInterval(interval);
 
-  // we only want to start the timer if minutes is > 0
   if (totalSeconds > 0) {    
-    /* the "interval" variable here using "setInterval()" begins the recurring increment of the 
-       secondsElapsed variable which is used to check if the time is up */
+    
       interval = setInterval(function() {
         secondsElapsed++;
-        //So renderTime() is called here once every second.
         renderTime();
+        checkTimeout();
       }, 1000);
-  } else {
-    alert("Minutes of work/rest must be greater than 0.")
   }
 }
 
-/* This function stops the setInterval() set in startTimer but does not
-   reset the secondsElapsed variable and does not reset the time by calling "setTime()" */
-function pauseTimer() {
+function stopTimer() {
+  secondsElapsed = 0;
   clearInterval(interval);
   renderTime();
 }
 
-/* This function stops the interval and also resets secondsElapsed 
-   and calls "setTime()" which effectively reset the timer 
-   to the input selections workMinutesInput.value and restMinutesInput.value */
-function stopTimer() {
-  secondsElapsed = 0;
-  setTime();
-  renderTime();
-}
+function renderTime() {
+  timerDisplay.textContent = "Timer: " + getFormattedSeconds();
+} 
 
-/* Our timer is fancy enough to handle 2 different settings at once this toggle 
-   function basically just specifies which of our 2 timer settings to use. */
-function toggleStatus(event) {
-  var checked = event.target.checked;
-
-  if (checked) {
-    status = "Working";
-  } else {
-    status = "Resting";
+//Checks to see if timer has run out
+function checkTimeout() {
+ if (secondsElapsed >= totalSeconds) {
+  alert("Whoops, you ran out of time! Here's your score:");
+  stopTimer();
+  
+  if (gameover == false) {
+    questionsDisplay.style.display = "none";
+    finalscoreDisplay.style.display = "block";
   }
-
-  statusSpan.textContent = status;
-
-  secondsElapsed = 0;
-  setTime();
-  renderTime();
+  console.log("Whoops, you ran out of time! Here's your score:", score);
 }
-
-
-  //This is where the app is really kicked-off, setTime and renderTime are the two main routines.
-  setTime();
-  renderTime();
-}
-
-pauseButton.addEventListener("click", pauseTimer);
-stopButton.addEventListener("click", stopTimer);
-statusToggle.addEventListener("change", toggleStatus);
+} 

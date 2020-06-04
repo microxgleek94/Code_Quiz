@@ -23,88 +23,83 @@
 
 <body>
     <div class="container-fluid" id="start-page">
-        <div class ="row">
-            <div class= "col-sm-4 pl-5 pr-5 hide" id="high-score-display">View High Scores</div>
-            <div class= "col-sm-4"></div>
-            <div class= "col-sm-4 pl-5 pr-5 text-sm-center class" id="timer-display">Timer:</div>
+        <div class="row">
+            <div class="col-sm-4 pl-5 pr-5" id="high-score-display">View High Scores</div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4 pl-5 pr-5 text-sm-center class" id="timer-display">Timer:</div>
         </div>
         <div class="jumbotron jumbotron-fluid col-sm pl-5 pr-5 text-sm-center" id="quiz-info">
             <div class="container">
-                <h1 class="display-4">Marvel Cinematic Universe Quiz</h1>
-                <p class="lead">You have 60 seconds to answer 5 questions about various aspects of the Marvel Cinematic Universe! Be warned: if you get a question incorrect, 5 seconds
-                    will be deducted from your remaining time. After the quiz is over, be sure save your high score and see if you can beat it next time. Good luck!
+                <h1 class="display-4 pl-5 pr-5 text-sm-center">Marvel Cinematic Universe Quiz</h1>
+                <p class="lead pl-5 pr-5 text-sm-center">You have 60 seconds to answer 5 questions about various aspects of the Marvel Cinematic
+                    Universe! Be warned: if you get a question incorrect, 5 seconds
+                    will be deducted from your remaining time. After the quiz is over, be sure save your high score and
+                    see if you can beat it next time. Good luck!
                 </p>
             </div>
         </div>
-        <button type="button" class="btn btn-info btn-lg btn-block" id="start-button">Click here to start the quiz!</button>
+        <button type="button" class="btn btn-info btn-lg btn-block" id="start-button">Click here to start the
+            quiz!</button>
     </div>
 
     <!-- This is where the questions will dynamically appear and the user will interact with -->
     <div class="container-fluid" id="question-block">
-        <div id="question-display">Question</div>
+        <div class= "pl-5 pr-5 text-sm-center" id="question-display">Question</div>
         <div id="answer-display">
-        <button class="btn">Answer 1</button>
-        <button class="btn">Answer 2</button>
-        <button class="btn">Answer 3</button>
-        <button class="btn">Answer 4</button>
-      </div>
-      <div id="results"></div>
+            <button class="btn pl-5 pr-5 text-sm-center" id="optA" data-index="A">Answer A</button>
+            <button class="btn pl-5 pr-5 text-sm-center" id="optB" data-index="B">Answer B</button>
+            <button class="btn pl-5 pr-5 text-sm-center" id="optC" data-index="C">Answer C</button>
+            <button class="btn pl-5 pr-5 text-sm-center" id="optD" data-index="D">Answer D</button>
+        </div>
+        <div id="results"></div>
     </div>
 
 
 
-
-
-    <!-- This is where final score will dynamically appear after the game ends and the user will interact with -->
+    <!-- This is where final score will dynamically appear after the game ends 
+    and the user will submit their name -->
     <div id="final-score-container"></div>
-    <div id = "finalscore" style = "display:none">
+    <div id="finalscore" style="display:none">
         <h3> Time's Up! How'd you do?</h3>
-        <p>  Final Score: <span id = 'score'>0 </span></p>
-        <form id = "username">
+        <p> Final Score: <span id='score'>0 </span></p>
+        <form id="username">
             <label>Players' Name </label>
-            <input type="text" id="userinput"/>
-            <input type = "button" value = "Submit" id ="submitName"/>
+            <input type="text" id="userinput" />
+            <input type="button" value="Submit" id="submitName" />
         </form>
     </div>
 
 
-    <!-- This is where the high score will dynamically appear and the user can input their score -->
-    <div id="high-score-container" style = "display:none">
-    <div id = "highscore-list">
-        <h3> High Score List </h3>
-        <ul id ="pastScores"></ul>
-        <form id = "menu">
-           <input type = "button" value = "GoBack" id = "goBackMenu">
-           <input type = "button" value = "Clear HighScore" id = "clearScore"> 
-        </form>
-    </div>
+    <!-- This is where the high score list will dynamically appear 
+        and the user can view their past scores -->
+    <div id="high-score-container" style="display:none">
+        <div id="highscore-list">
+            <h3> High Score List </h3>
+            <ul id="pastScores"></ul>
+            <form id="menu">
+                <input type="button" value="GoBack" id="goBackMenu">
+                <input type="button" value="Clear HighScore" id="clearScore">
+            </form>
+        </div>
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-    <!-- jQuery, Bootstrap, and Personal JS links -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
-    </script>
-    <script src="script.js"></script>
+        <!-- jQuery, Bootstrap, and Personal JS links -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+        </script>
+        <script src="script.js"></script>
 </body>
 
 </html>
