@@ -28,7 +28,7 @@
             <div class="col-sm-4"></div>
             <div class="col-sm-4 pl-5 pr-5 text-sm-center class" id="timer-display">Timer:</div>
         </div>
-        <div class="jumbotron jumbotron-fluid col-sm pl-5 pr-5 text-sm-center" id="quiz-info">
+        <div class="jumbotron jumbotron-fluid col-sm pl-5 pr-5 text-sm-center" id="start-page">
             <div class="container">
                 <h1 class="display-4 pl-5 pr-5 text-sm-center">Marvel Cinematic Universe Quiz</h1>
                 <p class="lead pl-5 pr-5 text-sm-center">You have 60 seconds to answer 5 questions about various aspects of the Marvel Cinematic
@@ -43,7 +43,7 @@
     </div>
 
     <!-- This is where the questions will dynamically appear and the user will interact with -->
-    <div class="container-fluid" id="question-block">
+    <div class="container-fluid" id="question-block" style="display:none">
         <div class= "pl-5 pr-5 text-sm-center" id="question-display">Question</div>
         <div id="answer-display">
             <button class="btn pl-5 pr-5 text-sm-center" id="optA" data-index="A">Answer A</button>
@@ -61,11 +61,11 @@
     <div id="final-score-container"></div>
     <div id="finalscore" style="display:none">
         <h3> Time's Up! How'd you do?</h3>
-        <p> Final Score: <span id='score'>0 </span></p>
+        <p> Final Score: <span id="score">0</span></p>
         <form id="username">
             <label>Players' Name </label>
-            <input type="text" id="userinput" />
-            <input type="button" value="Submit" id="submitName" />
+            <input type="text" id="userinput">
+            <input type="button" value="Submit" id="submitName">
         </form>
     </div>
 

@@ -35,13 +35,13 @@
     * If the user chooses a correct answer, "Correct!" is shown at the  bottom of the page
     * If the user gets the answer incorrect, "Incorrect!" is shown at the bottom of the page, and also time is subtracted from the counter 
     *Sounds need to be inputted for incorrect and corrct answers
-    *Music to play in back ground?
+    *Music to play in background?
 
 **When the Quiz is over**
 
     *The quiz ends when all the questions have been answered OR the timer hits 0
     *The user is taken to a new page
-    *The user needs to be alerted the quiz is done -- message; "All Done!"
+    *The user needs to be alerted the quiz is done -- message; "Time's Up! How'd you do?"
     *The user's high score needs to appear on this page
     * An input field labeled "Intials" needs to appear so the user can enter their initials for the high score
     * There needs to be a "Submit" button
