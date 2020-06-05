@@ -17,7 +17,7 @@ var userinputDisplay = document.querySelector("#userinput");
 var submitNameDisplay = document.querySelector("#submitName");
 var highscoreDisplay = document.querySelector("#highscore-list");
 var pastScoresDisplay = document.querySelector("#pastScores");
-var goBackBtnDisplay = document.querySelector("#goBackMenu");
+var goBackBtnDisplay = document.querySelector("#goBackBtn");
 var clearScoreDisplay = document.querySelector("#clearScore");
 
 
@@ -108,7 +108,6 @@ function renderQuestion() {
   console.log("Create Questions");
 
   quizquestion = questionArr[index];
-  console.log(`The items we are dealing with are ${quizquestion = questionArr[index]}`);
 
   questionsDisplay.textContent = quizquestion.question;
   optA.textContent = quizquestion.opt1;
@@ -139,7 +138,7 @@ function checkAnswer(event) {
     resultsDisplay.textContent = "Puny god! That was the wrong answer. You're gunna have to do better than that.";
     console.log(`User chose inccorect answer: - 5 sec. current score: ${score}`);
   }
-  setTimeout(nextQuestions, 1000);
+  setTimeout(nextQuestions, (1000)*2);
 }
 
 function nextQuestions() {
@@ -156,7 +155,7 @@ function nextQuestions() {
 
 function renderFinalscore() {
   gameover = true;
-  questionsBlock.style.display = "none";
+  questionBlock.style.display = "none";
   finalscoreDisplay.style.display = "block";
   scoreDisplay.textContent = score;
 }
@@ -177,7 +176,7 @@ function addPersonToList() {
   event.preventDefault();
   var name = userinputDisplay.value;
   playerList.push({ "name": name, "score": score });
-  console.log(`Player list array content: ${pastscoreDisplay}`);
+  console.log(`Player list array content: ${pastScoresDisplay}`);
 }
 
 
@@ -188,13 +187,13 @@ function renderHighscore() {
   var li = document.createElement("li");
   li.id = playerList.length;
   li.textContent = name + ":  " + score;
-  pastscoreDisplay.append(li);
+  pastScoresDisplay.append(li);
 }
 
 
 
 //function for the "Go Back" button
-goBackBtnDisplay.addEventListener("click", goBackMenu);
+goBackBtnDisplay.addEventListener("click", goBackBtn);
 
 function goBackBtn() {
   console.log(`User clicked on the go back button`);
@@ -213,22 +212,19 @@ clearScoreDisplay.addEventListener("click", emptyscore);
 function emptyscore() {
   event.preventDefault();
   event.stopPropagation();
-  playerListDisplay.innerHTML = "";
+  playerList.innerHTML = "";
   playerList = [];
-  console.log(`Clear score button pressed; Playerlist Arr should have nothing in it: ${pastScoredDisplay}`);
+  console.log(`Clear score button pressed; Playerlist Arr should have nothing in it: ${pastScoresDisplay}`);
 }
 
 highscoreDisplay.addEventListener("click", function (event) {
-  console.log("User clicked Top Corner View High Score");
+  console.log(`User clicked View High Score: ${highscoreDisplay}`);
   stopTimer();
   startpageDisplay.style.display = "none";
   questionBlock.style.display = "none";
   finalscoreDisplay.style.display = "none";
   highscoreDisplay.style.display = "block";
 })
-
-
-
 
 
 
@@ -257,7 +253,7 @@ function stopTimer() {
 }
 
 function renderTime() {
-  timerDisplay.textContent = "Timer: ";
+  timerDisplay.textContent = "Timer: " + getFormattedSeconds();
 }
 
 //Checks to see if timer has run out
@@ -273,3 +269,17 @@ function checkTimeout() {
     console.log(`Whoops, you ran out of time! Here's your score: ${score}`);
   }
 } 
+
+function getFormattedSeconds() {
+  var secondsLeft = (totalSeconds - secondsElapsed)
+  var formattedSeconds;
+
+  if (secondsLeft < 10) {
+    formattedSeconds = "0" + secondsLeft;
+  } else {
+    formattedSeconds = secondsLeft;
+  }
+
+  return formattedSeconds;
+}
+

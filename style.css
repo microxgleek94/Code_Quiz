@@ -8,3 +8,11 @@ body {
 #question-block {
     display: none;
 }
+
+#finalscore
+#highscore-list
+#results
+#questions-display {
+    text-align: center;
+    padding: 20px;
+}
