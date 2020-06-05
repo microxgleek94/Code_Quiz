@@ -4,3 +4,7 @@ body {
 #start-button {
     font-style: italic;
 }
+
+#question-block {
+    display: none;
+}

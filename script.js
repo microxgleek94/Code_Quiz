@@ -1,10 +1,11 @@
 // elements from HTML that JS will interact with
-var highscoreDisplay = document.querySelector("#high-score-container");
+var highscoreDisplay = document.querySelector("#high-score-display");
 var timerDisplay = document.querySelector("#timer-display");
 var startpageDisplay = document.querySelector("#start-page");
 var quizStartBtn = document.querySelector("#start-button");
-var questionDisplay = document.querySelector("#question-display");
-var answerDisplay = document.querySelector("#answer-display");
+var questionBlock = document.querySelector("#question-block");
+var questionsDisplay = document.querySelector("#questions-display");
+var answerDisplay = document.querySelector("#answer-block");
 var optA = document.querySelector("#optA");
 var optB = document.querySelector("#optB");
 var optC = document.querySelector("#optC");
@@ -25,7 +26,7 @@ var clearScoreDisplay = document.querySelector("#clearScore");
 // Defining the "question" objects and other varibles
 
 var quest1 = {
-  question: "What is Captian America's weapon of opt?",
+  question: "What is Captian America's weapon of choice?",
   opt1: "A.) A hammer",
   opt2: "B.) Various inventions created from his imagination",
   opt3: "C.) A shield",
@@ -35,7 +36,7 @@ var quest1 = {
 
 var quest2 = {
   question: "In the 'Avengers: Age of Ultron', who is Vision?",
-  opt1: "A.) Tony Stark's AI assistance, J.A.R.V.I.S after it's programming is uploaded into a synthetic body",
+  opt1: "A.) Tony Stark's AI assistant J.A.R.V.I.S after it's programming is uploaded into a synthetic body",
   opt2: "B.) An evil dream monster that steals people's sight when they're sleeping",
   opt3: "C.) Scarlet Witch's partner",
   opt4: "D.) Both A and C",
@@ -69,6 +70,7 @@ var quest5 = {
   answer: "B"
 }
 
+var playerList = [{ name: '', score: '' }];
 
 var totalSeconds;
 var secondsElapsed = 0;
@@ -77,12 +79,8 @@ var score = 0;
 var questionArr = [quest1, quest2, quest3, quest4, quest5];
 var questionLen = questionArr.length - 1;
 var index = 0;
-var randQuizQuestion;
-var currentQuestion = 0;
+var quizquestion;
 var gameover;
-var playerList = [{name:'', score:''}];
-
-
 
 
 
@@ -91,151 +89,149 @@ var playerList = [{name:'', score:''}];
 
 /* When user "clicks" start quiz button function will run
 and the quiz infox box will dissappear and the first question will appear*/
-quizStartBtn.addEventListener("click", startQuiz());
+quizStartBtn.addEventListener("click", startQuiz);
 
 
-function startQuiz() {
+function startQuiz(event) {
   gameover = false;
   console.log("The start quiz button was pressed and questions page appeared");
   startpageDisplay.style.display = "none";
-  questionDisplay.style.display = "block";
+  questionBlock.style.display = "block";
   startTimer();
+  renderQuestion();
 }
 
 
-  /* function to create and print the question and answers 
-   from therir objects to the defined HTML elements */
-  function renderQuestion() {
-    console.log("Start Render Question");
-    
-    //to make question array appear randomly each time user plays quiz
-    randQuizQuestion = questionArr[index].sort(() => Math.random() -0.5);
+/* function to create and print the question and answers 
+ from therir objects to the defined HTML elements */
+function renderQuestion() {
+  console.log("Create Questions");
 
-    questionDisplay.textContent = quizquestion.question;
-    optA.textContent = randQuizQuestion.opt1;
-    optB.textContent = randQuizQuestion.opt2;
-    optC.textContent = randQuizQuestion.opt3;
-    optD.textContent = randQuizQuestion.opt4;
-    resultsDisplay.textContent = "";
+  quizquestion = questionArr[index];
+  console.log(`The items we are dealing with are ${quizquestion = questionArr[index]}`);
+
+  questionsDisplay.textContent = quizquestion.question;
+  optA.textContent = quizquestion.opt1;
+  optB.textContent = quizquestion.opt2;
+  optC.textContent = quizquestion.opt3;
+  optD.textContent = quizquestion.opt4;
+  resultsDisplay.textContent = "";
+}
+
+
+
+answerDisplay.addEventListener("click", checkAnswer);
+
+function checkAnswer(event) {
+  event.stopPropagation();
+
+  //this checks to see which answer the user picked 
+  let userchoice = event.target.getAttribute("data-index");
+  console.log(`User clicked on choice: ${userchoice}`);
+  console.log(`Correct Choice is: ${quizquestion.answer}`);
+
+  if (userchoice == quizquestion.answer) {
+    score++;
+    resultsDisplay.textContent = "Great job, bub. That was the right answer.";
+    console.log(`User picked correct answer, current score: ${score}`);
+  } else {
+    secondsElapsed = secondsElapsed + 5;
+    resultsDisplay.textContent = "Puny god! That was the wrong answer. You're gunna have to do better than that.";
+    console.log(`User chose inccorect answer: - 5 sec. current score: ${score}`);
   }
+  setTimeout(nextQuestions, 1000);
+}
 
-
-
-  answerDisplay.addEventListener("click", checkAnswer);
-
-  function checkAnswer(event) {
-    event.stopPropagation();
-   
-    //this checks to see which answer the user picked 
-    let userchoice = event.target.getAttribute("data-index");
-    console.log(`User clicked on choice: ${userchoice}`);
-    console.log(`Correct Choice is: ${quizquestion.answer}`);
-  
-    if (userchoice == quizquestion.answer) {
-        score++;
-        resultsDisplay.textContent="Great job, bub. That was the right answer.";
-        console.log(`User picked correct answer current score: ${score}`);
-    } else {
-        secondsElapsed = secondsElapsed + 5;
-        resultsDisplay.textContent="Puny god! That was the wrong answer. You're gunna have to do better than that.";
-        console.log(`User chose inccorect answer: - 5 sec. current score: ${score}`);
-    }
-    setTimeout(nextQuestions, 1000);
-  } 
-  
-  function nextQuestions () {
-    currentQuestion++;
-    if (index < questionLen) {
-      // Keep going to next question in the array
-      index++;
-      renderQuestion();
-    } else {
-      // Game over
-      stopTimer();
-      renderFinalscore();
-    }
+function nextQuestions() {
+  if (index < questionLen) {
+    // Keep going to next question in the array
+    index++;
+    renderQuestion();
+  } else {
+    // Game over
+    stopTimer();
+    renderFinalscore();
   }
-  
-  function renderFinalscore() {
-    gameover = true;
-    questionsDisplay.style.display = "none";
-    finalscoreDisplay.style.display = "block";
-    scoreDisplay.textContent = score;
-  }
-  
+}
+
+function renderFinalscore() {
+  gameover = true;
+  questionsBlock.style.display = "none";
+  finalscoreDisplay.style.display = "block";
+  scoreDisplay.textContent = score;
+}
+
 //function for user to submit their name and score after game ends 
-  submitNameDisplay.addEventListener("click", function (event){
+submitNameDisplay.addEventListener("click", function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+  console.log(`Submit button clicked and information entered: ${userinputDisplay.value}`);
+  finalscoreDisplay.style.display = "none";
+  addPersonToList();
+  highscoreDisplay.style.display = "block";
+  renderHighscore();
+})
 
-    event.preventDefault();
-    event.stopPropagation();
-    console.log(`Submit button clicked and information entered: ${userinputDisplay.value}`);
-    finalscoreDisplay.style.display = "none";
-    addPersonToList();
-    highscoreDisplay.style.display = "block";
-    renderHighscore();
-  } )
-  
-  //function to add a user's name and score to the "High score" list
-  function addPersonToList() {
-    event.preventDefault();
-    var name = userinputDisplay.value;
-    playerList.push({ "name": name, "score": score });
-    console.log(`Player list array content: ${pastscoreDisplay}`);
-    
-  }
-  
+//function to add a user's name and score to the "High score" list
+function addPersonToList() {
+  event.preventDefault();
+  var name = userinputDisplay.value;
+  playerList.push({ "name": name, "score": score });
+  console.log(`Player list array content: ${pastscoreDisplay}`);
+}
 
-  //function to create user's final score
-  function renderHighscore () {
-    console.log(`User's score is: ${score}`);
-    var name = userinputDisplay.value;
-    var li = document.createElement("li");
-    li.id = playerList.length;
-    li.textContent = name + ":  " + score;
-    pastscoreDisplay.append(li);
-  }
-  
+
+//function to create user's final score
+function renderHighscore() {
+  console.log(`User's high score is: ${score}`);
+  var name = userinputDisplay.value;
+  var li = document.createElement("li");
+  li.id = playerList.length;
+  li.textContent = name + ":  " + score;
+  pastscoreDisplay.append(li);
+}
+
 
 
 //function for the "Go Back" button
-  goBackBtnDisplay.addEventListener("click", goBackMenu);
-  
-  function goBackBtn () {
-    console.log("Inside GoBack Menu");
-    highscoreDisplay.style.display = "none";
-    quizinfoDisplay.style.display = "block";
-    score=0;
-    index=0;
-    totalSeconds = 0;
-    secondsElapsed = 0;
-    scoreDisplay.textContent = 0; 
-    userinputDisplay.value=""; 
-  }
-  
-  clearScoreDisplay.addEventListener("click", emptyscore);
-  
-  function emptyscore () {
-    event.preventDefault();
-    event.stopPropagation();
-    playerListDisplay.innerHTML = "";
-    playerList = [];
-    console.log(`Clear score button pressed; Playerlist Arr should be nothing: ${pastScoredDisplay}`);
-  }
-  
-  viewscoreEl.addEventListener("click", function(event) {
-    console.log("User clicked Top Corner View High Score");
-    stopTimer();
-    firstpageEl.style.display = "none";
-    questionsDisplay.style.display = "none";
-    finalscoreDisplay.style.display = "none";
-    highscoreDisplay.style.display = "block";
-  })
+goBackBtnDisplay.addEventListener("click", goBackMenu);
+
+function goBackBtn() {
+  console.log(`User clicked on the go back button`);
+  highscoreDisplay.style.display = "none";
+  startpageDisplay.style.display = "block";
+  score = 0;
+  index = 0;
+  totalSeconds = 0;
+  secondsElapsed = 0;
+  scoreDisplay.textContent = 0;
+  userinputDisplay.value = "";
+}
+
+clearScoreDisplay.addEventListener("click", emptyscore);
+
+function emptyscore() {
+  event.preventDefault();
+  event.stopPropagation();
+  playerListDisplay.innerHTML = "";
+  playerList = [];
+  console.log(`Clear score button pressed; Playerlist Arr should have nothing in it: ${pastScoredDisplay}`);
+}
+
+highscoreDisplay.addEventListener("click", function (event) {
+  console.log("User clicked Top Corner View High Score");
+  stopTimer();
+  startpageDisplay.style.display = "none";
+  questionBlock.style.display = "none";
+  finalscoreDisplay.style.display = "none";
+  highscoreDisplay.style.display = "block";
+})
 
 
 
 
-  
-  
+
+
 
 // Timer functions //
 
@@ -244,13 +240,13 @@ function startTimer() {
   totalSeconds = 60;
   clearInterval(interval);
 
-  if (totalSeconds > 0) {    
-    
-      interval = setInterval(function() {
-        secondsElapsed++;
-        renderTime();
-        checkTimeout();
-      }, 1000);
+  if (totalSeconds > 0) {
+
+    interval = setInterval(function () {
+      secondsElapsed++;
+      renderTime();
+      checkTimeout();
+    }, 1000);
   }
 }
 
@@ -262,18 +258,18 @@ function stopTimer() {
 
 function renderTime() {
   timerDisplay.textContent = "Timer: ";
-} 
+}
 
 //Checks to see if timer has run out
 function checkTimeout() {
- if (secondsElapsed >= totalSeconds) {
-  alert(`Whoops, you ran out of time! Here's your score: ${score}`);
-  stopTimer();
-  
-  if (gameover == false) {
-    questionsDisplay.style.display = "none";
-    finalscoreDisplay.style.display = "block";
+  if (secondsElapsed >= totalSeconds) {
+    alert(`Whoops, you ran out of time! Here's your score: ${score}`);
+    stopTimer();
+
+    if (gameover == false) {
+      questionBlock.style.display = "none";
+      finalscoreDisplay.style.display = "block";
+    }
+    console.log(`Whoops, you ran out of time! Here's your score: ${score}`);
   }
-  console.log(`Whoops, you ran out of time! Here's your score: ${score}`);
-}
 } 
