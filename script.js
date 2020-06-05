@@ -197,8 +197,8 @@ goBackBtnDisplay.addEventListener("click", goBackBtn);
 
 function goBackBtn() {
   console.log(`User clicked on the go back button`);
-  highscoreDisplay.style.display = "none";
-  startpageDisplay.style.display = "block";
+  highscoreDisplay.style.display = "hide";
+  startpageDisplay.style.display = "show";
   score = 0;
   index = 0;
   totalSeconds = 0;
@@ -220,10 +220,10 @@ function emptyscore() {
 highscoreDisplay.addEventListener("click", function (event) {
   console.log(`User clicked View High Score: ${highscoreDisplay}`);
   stopTimer();
-  startpageDisplay.style.display = "none";
-  questionBlock.style.display = "none";
-  finalscoreDisplay.style.display = "none";
-  highscoreDisplay.style.display = "block";
+  startpageDisplay.style.display = "hide";
+  questionBlock.style.display = "hide";
+  finalscoreDisplay.style.display = "hide";
+  highscoreDisplay.style.display = "show";
 })
 
 

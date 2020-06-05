@@ -9,19 +9,12 @@ body {
     display: none;
 }
 
-#finalscore
-#highscore-list
-#results
-#questions-display
-#answer-block
- {
-    padding: 500px;
-
-
-}
-
 .btn {
     background-color: rgb(235, 162, 114);
     border: 4px black solid;
     margin: auto;
+}
+
+#results {
+    font-size: 20px;
 }
