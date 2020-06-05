@@ -45,8 +45,8 @@
 
     <!-- This is where the questions will dynamically appear 
         and the user will interact with -->
-    <div class="container-fluid" id="question-block">
-        <div class="pl-5 pr-5 text-sm-center" id="questions-display">Questions</div>
+    <div class="container-fluid pl-5 pr-5 text-sm-center" id="question-block">
+        <div id="questions-display">Questions</div>
         <div id="answer-block">
             <button class="btn pl-5 pr-5 text-sm-center" id="optA" data-index="A">Answer A</button>
             <button class="btn pl-5 pr-5 text-sm-center" id="optB" data-index="B">Answer B</button>
@@ -60,7 +60,7 @@
 
     <!-- This is where final score will dynamically appear after the game ends 
         and the user will submit their name -->
-    <div id="finalscore" style="display:none">
+    <div class="pl-5 pr-5 text-sm-center" id="finalscore" style="display:none">
         <h3> Time's Up! How'd you do?</h3>
         <p> Final Score: <span id="score">0</span></p>
         <form id="username">
@@ -74,7 +74,7 @@
     <!-- This is where the high score list will dynamically appear 
         and the user can view their past scores -->
 
-    <div id="highscore-list" style="display:none">
+    <div class="pl-5 pr-5 text-sm-center" id="highscore-list" style="display:none">
         <h3> High Score List</h3>
         <ul id="pastScores"></ul>
         <form id="menu">

@@ -12,7 +12,16 @@ body {
 #finalscore
 #highscore-list
 #results
-#questions-display {
-    text-align: center;
-    padding: 20px;
+#questions-display
+#answer-block
+ {
+    padding: 500px;
+
+
+}
+
+.btn {
+    background-color: rgb(235, 162, 114);
+    border: 4px black solid;
+    margin: auto;
 }
