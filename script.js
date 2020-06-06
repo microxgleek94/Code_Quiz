@@ -197,8 +197,8 @@ goBackBtnDisplay.addEventListener("click", goBackBtn);
 
 function goBackBtn() {
   console.log(`User clicked on the go back button`);
-  highscoreDisplay.style.display = "hide";
-  startpageDisplay.style.display = "show";
+  highscoreDisplay.style.display = "none";
+  startpageDisplay.style.display = "block";
   score = 0;
   index = 0;
   totalSeconds = 0;
@@ -207,12 +207,13 @@ function goBackBtn() {
   userinputDisplay.value = "";
 }
 
+// function to clear high score list 
 clearScoreDisplay.addEventListener("click", emptyscore);
 
 function emptyscore() {
   event.preventDefault();
   event.stopPropagation();
-  playerList.innerHTML = "";
+  document.getElementById("pastScores").innerHTML = "";
   playerList = [];
   console.log(`Clear score button pressed; Playerlist Arr should have nothing in it: ${pastScoresDisplay}`);
 }
